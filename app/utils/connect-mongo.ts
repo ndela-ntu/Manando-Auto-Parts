@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGO_URI = process.env.MONGODB_URI0;
+const MONGO_URI = process.env.MONGODB_URI1;
 const cached: {
   connection?: typeof mongoose;
   promise?: Promise<typeof mongoose>;

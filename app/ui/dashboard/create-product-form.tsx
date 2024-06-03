@@ -11,7 +11,7 @@ export default function CreateProductForm() {
 
   const [file, setFile] = useState<File | undefined>(undefined);
 
-  const initialState = { message: null, errors: {}, success: false };
+  const initialState = { message: null, errors: {}};
   const [state, dispatch] = useFormState(createProduct, initialState);
 
   return (

@@ -9,6 +9,9 @@ import Product, { IProduct } from '../models/product';
 import uploadImage from '../utils/upload-image';
 import connectMongo from '../utils/connect-mongo';
 import deleteImage from '../utils/delete-image';
+import Address from '../models/address';
+import Customer from '../models/customer';
+import mongoose from 'mongoose';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -40,7 +43,7 @@ const ProductSchema = z.object({
   image: z
     .instanceof(File)
     .refine((file: File) => file.size !== 0, 'Image is required')
-    .refine((file) => {
+    .refine((file: File) => {
       return !file || file.size <= 1024 * 1024 * 3;
     }, 'File size must be less than 3MB'),
   category: z.enum(['INTERIOR', 'EXTERIOR']),
@@ -191,3 +194,128 @@ export async function deleteProduct(id: string, publicId: string) {
 
   revalidatePath('/dashboard/products');
 }
+
+const AddressSchema = z.object({
+  id: z.string(),
+  streetAddress: z.string().min(1, { message: 'Address is required' }),
+  city: z.string().min(1, { message: 'City is required' }),
+  postalCode: z.coerce
+    .number()
+    .gt(0, { message: 'Postal address is required' }),
+});
+
+export type AddressState = {
+  errors?: {
+    streetAddress?: string[];
+    city?: string[];
+    postalCode?: string[];
+  };
+  message?: string | null;
+  isSuccess?: boolean;
+  addressId?: string; 
+};
+
+const CreateAddressSchema = AddressSchema.omit({ id: true });
+
+export async function createAddress(
+  prevState: AddressState,
+  formData: FormData,
+) {
+  const validatedFields = CreateAddressSchema.safeParse({
+    streetAddress: formData.get('address'),
+    city: formData.get('city'),
+    postalCode: formData.get('postalCode'),
+  });
+
+  if (!validatedFields.success) {
+    return <AddressState>{
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missed fields, failed to create product.',
+    };
+  }
+
+  try {
+    const { streetAddress, city, postalCode } =
+      validatedFields.data;
+
+      await connectMongo();
+      const address = await Address.create({
+        streetAddress,
+        city,
+        postalCode,
+      });
+
+      return <AddressState>{
+        message: 'Success',
+        isSuccess: true,
+        addressId: address._id.toString(),
+      }
+  } catch (error) {
+    return <AddressState>{
+      message: 'Error from server',
+    };
+  }
+}
+
+const PersonalDetailsSchema = z.object({
+  id: z.string(),
+  fullNames: z.string().min(1, { message: 'Full names required' }),
+  email: z.string().min(0, { message: 'Email is required' }),
+  phoneNumber: z.coerce
+    .number()
+    .gt(0, { message: 'Number is required' }),
+});
+
+export type PersonalDetailsState = {
+  errors?: {
+    fullNames?: string[];
+    email?: string[];
+    phoneNumber?: string[];
+  };
+  message?: string | null;
+};
+
+const CreateProductDetailsSchema = PersonalDetailsSchema.omit({ id: true });
+
+export async function createPersonalDetails(
+  addressId: string,
+  prevState: PersonalDetailsState,
+  formData: FormData,
+) {
+  const validatedFields = CreateProductDetailsSchema.safeParse({
+    fullNames: formData.get('fullNames'),
+    email: formData.get('email'),
+    phoneNumber: formData.get('phoneNumber'),
+  });
+
+  if (!validatedFields.success) {
+    return <PersonalDetailsState>{
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missed fields, failed to create product.',
+    };
+  }
+
+  try {
+    const { fullNames, email, phoneNumber } =
+      validatedFields.data;
+
+      const address = new mongoose.Schema.Types.ObjectId(addressId);
+
+      await connectMongo();
+      await Customer.create({
+        fullNames,
+        email,
+        phoneNumber,
+        address,
+      });
+
+      return <PersonalDetailsState>{
+        message: 'Success',
+      }
+  } catch (error) {
+    return <PersonalDetailsState>{
+      message: 'Error from server',
+    };
+  }
+}
+

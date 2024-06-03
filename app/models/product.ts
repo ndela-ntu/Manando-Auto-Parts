@@ -1,9 +1,7 @@
-import { ObjectId } from "mongodb";
-import { Schema, model, models } from "mongoose"
-import { string } from "zod";
+import mongoose, { Schema, model, models } from "mongoose";
 
 export interface IProduct {
-    id: ObjectId;
+    id: mongoose.Schema.Types.ObjectId;
     name: string;
     description: string;
     price: number;

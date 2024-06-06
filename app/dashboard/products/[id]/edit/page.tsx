@@ -13,9 +13,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="px-12 py-4">
+    <div className="px-2 lg:px-12 py-4">
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Create Product
+        Edit Product
       </h1>
       <EditProductForm product={product} />
     </div>

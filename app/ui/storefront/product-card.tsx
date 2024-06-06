@@ -4,6 +4,7 @@ import { IProduct } from '@/app/models/product';
 import { useCartStore } from '@/app/providers/cart-store-provider';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 type Props = {
   product: IProduct;
@@ -35,7 +36,7 @@ export default function ProductCard({ product }: Props) {
         <p className="">{product.description}</p>
         <div className="card-actions justify-center">
           <button
-            className="btn btn-primary"
+            className="btn bg-blue-500 text-white"
             onClick={() => {
               if (!items.includes(product)) {
                 addToCart(product);

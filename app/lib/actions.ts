@@ -10,8 +10,9 @@ import uploadImage from '../utils/upload-image';
 import connectMongo from '../utils/connect-mongo';
 import deleteImage from '../utils/delete-image';
 import Address from '../models/address';
-import Customer from '../models/customer';
-import mongoose from 'mongoose';
+import Customer, { ICustomer } from '../models/customer';
+import mongoose, { ObjectId } from 'mongoose';
+import Invoice from '../models/invoice';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -212,7 +213,7 @@ export type AddressState = {
   };
   message?: string | null;
   isSuccess?: boolean;
-  addressId?: string; 
+  addressId?: string;
 };
 
 const CreateAddressSchema = AddressSchema.omit({ id: true });
@@ -235,21 +236,20 @@ export async function createAddress(
   }
 
   try {
-    const { streetAddress, city, postalCode } =
-      validatedFields.data;
+    const { streetAddress, city, postalCode } = validatedFields.data;
 
-      await connectMongo();
-      const address = await Address.create({
-        streetAddress,
-        city,
-        postalCode,
-      });
+    await connectMongo();
+    const address = await Address.create({
+      streetAddress,
+      city,
+      postalCode,
+    });
 
-      return <AddressState>{
-        message: 'Success',
-        isSuccess: true,
-        addressId: address._id.toString(),
-      }
+    return <AddressState>{
+      message: 'Success',
+      isSuccess: true,
+      addressId: address._id.toString(),
+    };
   } catch (error) {
     return <AddressState>{
       message: 'Error from server',
@@ -261,9 +261,7 @@ const PersonalDetailsSchema = z.object({
   id: z.string(),
   fullNames: z.string().min(1, { message: 'Full names required' }),
   email: z.string().min(0, { message: 'Email is required' }),
-  phoneNumber: z.coerce
-    .number()
-    .gt(0, { message: 'Number is required' }),
+  phoneNumber: z.coerce.number().gt(0, { message: 'Number is required' }),
 });
 
 export type PersonalDetailsState = {
@@ -273,6 +271,8 @@ export type PersonalDetailsState = {
     phoneNumber?: string[];
   };
   message?: string | null;
+  isSuccess?: boolean;
+  customer?: ICustomer;
 };
 
 const CreateProductDetailsSchema = PersonalDetailsSchema.omit({ id: true });
@@ -292,30 +292,46 @@ export async function createPersonalDetails(
     return <PersonalDetailsState>{
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missed fields, failed to create product.',
+      isSuccess: false,
+      customer: undefined,
     };
   }
 
   try {
-    const { fullNames, email, phoneNumber } =
-      validatedFields.data;
+    const { fullNames, email, phoneNumber } = validatedFields.data;
 
-      const address = new mongoose.Schema.Types.ObjectId(addressId);
+    const address = new mongoose.Types.ObjectId(addressId);
 
-      await connectMongo();
-      await Customer.create({
-        fullNames,
-        email,
-        phoneNumber,
-        address,
-      });
+    await connectMongo();
+    const customer = await Customer.create({
+      fullNames,
+      email,
+      phoneNumber,
+      address,
+    });
 
-      return <PersonalDetailsState>{
-        message: 'Success',
-      }
+    return <PersonalDetailsState>{
+      message: 'Success',
+      isSuccess: true,
+      customer: customer,
+    };
   } catch (error) {
     return <PersonalDetailsState>{
       message: 'Error from server',
+      isSuccess: false,
+      customer: undefined,
     };
   }
 }
 
+export async function createInvoice(itemIds: ObjectId[], customerId?: ObjectId, paymentType?: string) {
+  await connectMongo();
+  await Invoice.create({
+    customer: customerId,
+    products: itemIds,
+    status: 'Pending',
+    paymentType
+  });
+  
+  redirect('/success');
+}

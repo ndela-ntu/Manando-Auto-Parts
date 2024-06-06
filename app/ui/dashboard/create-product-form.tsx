@@ -11,20 +11,25 @@ export default function CreateProductForm() {
 
   const [file, setFile] = useState<File | undefined>(undefined);
 
-  const initialState = { message: null, errors: {}};
+  const initialState = { message: null, errors: {} };
   const [state, dispatch] = useFormState(createProduct, initialState);
 
   return (
     <form action={dispatch}>
       <div className="mt-5 flex flex-col rounded-md border border-black p-8">
         <div className="mb-4 flex flex-col">
-          <div className="relative flex h-80 items-center justify-center rounded-sm border border-black">
+          <div className="relative w-full flex items-center justify-center rounded-sm border border-black">
             {file ? (
               <Image
                 src={URL.createObjectURL(file)}
-                width={200}
-                height={200}
                 alt="Image of item"
+                sizes="20vw"
+                style={{
+                  width: '30%',
+                  height: 'auto',
+                }}
+                width={150}
+                height={150}
               />
             ) : (
               <div className="flex h-[200px] w-[200px] items-center justify-center"></div>

@@ -30,5 +30,7 @@ const ProductSchema = new Schema<IProduct>({
     },
 },);
 
+ProductSchema.index({name: 'text', description: 'text'});
+
 const Product = models.Product || model('Product', ProductSchema);
 export default Product;

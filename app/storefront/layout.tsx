@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <CartStoreProvider>
       <div>
-        <Header />
+        <Header withoutCart={false} />
         <div>{children}</div>
       </div>
     </CartStoreProvider>

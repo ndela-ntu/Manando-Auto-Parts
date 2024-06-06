@@ -35,9 +35,14 @@ export default function EditProductForm({ product }: Props) {
           <div className="relative flex h-80 items-center justify-center rounded-sm border border-black">
             <Image
               src={file ? URL.createObjectURL(file) : product.imageURL}
-              width={200}
-              height={200}
               alt="Image of item"
+              sizes="20vw"
+              style={{
+                width: '30%',
+                height: 'auto',
+              }}
+              width={150}
+              height={150}
             />
             <input
               type="file"

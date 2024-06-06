@@ -2,23 +2,34 @@ import React from 'react';
 import connectMongo from '../utils/connect-mongo';
 import Product from '../models/product';
 import ProductCard from '../ui/storefront/product-card';
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
-import CartIcon from '../ui/storefront/cart-icon';
+import Search from '../ui/search';
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  let products: IProduct[];
   await connectMongo();
-  const products = await Product.find();
+  if (query == undefined || query === '') {
+    products = await Product.find();
+  }else {
+    products = await Product.find({ $text: { $search: query } });
+  }
 
   return (
     <div className="p-5">
       <div className="py-5">
-        <div className="lg:grid-cols:3 grid gap-2 p-10 sm:grid-cols-1 md:grid-cols-2">
+        <Search placeholder="Search parts..." />
+        <div className="grid grid-cols-1 gap-5 p-10 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>
-      <CartIcon />
     </div>
   );
 }

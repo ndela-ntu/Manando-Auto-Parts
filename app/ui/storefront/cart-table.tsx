@@ -2,12 +2,11 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { IProduct } from '@/app/models/product';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { useCartStore } from '@/app/providers/cart-store-provider';
 
 export default function CardTable() {
-  const { items, addToCart, removeFromCart } = useCartStore((state) => state);
+  const { items, removeFromCart } = useCartStore((state) => state);
 
   return (
     <div className="overflow-x-auto">
@@ -29,7 +28,7 @@ export default function CardTable() {
                   alt="Image of product"
                   sizes="100vw"
                   style={{
-                    width: '50%',
+                    width: '10%',
                     height: 'auto',
                   }}
                   width={50}
@@ -40,7 +39,7 @@ export default function CardTable() {
               <td>R{product.price}</td>
               <td>
                 <button className="rounded-md border p-2 hover:bg-gray-100" onClick={() => {
-                    removeFromCart(product.id.toString())
+                    removeFromCart(product.id.toString());
                 }}>
                   <span className="sr-only">Delete</span>
                   <TrashIcon className="h-3 w-3 text-black" />

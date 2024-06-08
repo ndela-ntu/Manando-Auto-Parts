@@ -26,7 +26,7 @@ export default async function Page({
         <Search placeholder="Search parts..." />
         <div className="grid grid-cols-1 gap-5 p-10 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
-            <ProductCard key={product.id.toString()} product={product} />
+            <ProductCard key={product.id.toString()} product={JSON.parse(JSON.stringify(product))} />
           ))}
         </div>
       </div>

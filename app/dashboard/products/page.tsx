@@ -1,4 +1,4 @@
-import Product from '@/app/models/product';
+import Product, { IProduct } from '@/app/models/product';
 import ProductsTable from '@/app/ui/dashboard/products-table';
 import { lusitana } from '@/app/ui/fonts';
 import connectMongo from '@/app/utils/connect-mongo';
@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default async function Page() {
   await connectMongo();
-  const products = await Product.find();
+  const products: IProduct[] = await Product.find();
 
   return (
     <>
@@ -14,7 +14,7 @@ export default async function Page() {
         Products
       </h1>
       <div className="py-5">
-        <ProductsTable products={products} />
+        <ProductsTable products={JSON.parse(JSON.stringify(products))} />
       </div>
       <Link
         href="/dashboard/products/create"

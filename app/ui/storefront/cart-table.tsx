@@ -13,7 +13,7 @@ export default function CardTable() {
       <table className="table">
         <thead>
           <tr>
-            <th></th>
+            <th className="hidden md:block"></th>
             <th>Name</th>
             <th>Price</th>
             <th></th>
@@ -22,7 +22,7 @@ export default function CardTable() {
         <tbody>
           {items.map((product) => (
             <tr key={product.id.toString()}>
-              <td>
+              <td className="hidden md:block">
                 <Image
                   src={product.imageURL}
                   alt="Image of product"
@@ -31,16 +31,19 @@ export default function CardTable() {
                     width: '10%',
                     height: 'auto',
                   }}
-                  width={50}
-                  height={50}
+                  width={200}
+                  height={200}
                 />
               </td>
               <td>{product.name}</td>
               <td>R{product.price}</td>
               <td>
-                <button className="rounded-md border p-2 hover:bg-gray-100" onClick={() => {
+                <button
+                  className="rounded-md border p-2 hover:bg-gray-100"
+                  onClick={() => {
                     removeFromCart(product.id.toString());
-                }}>
+                  }}
+                >
                   <span className="sr-only">Delete</span>
                   <TrashIcon className="h-3 w-3 text-black" />
                 </button>

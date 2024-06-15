@@ -2,6 +2,7 @@
 
 import { IProduct } from '@/app/models/product';
 import { useCartStore } from '@/app/providers/cart-store-provider';
+import { ShoppingCartIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,11 +12,23 @@ type Props = {
 };
 
 export default function ProductCard({ product }: Props) {
-  const { items, addToCart } = useCartStore((state) => state);
+  const { items, addToCart, removeFromCart } = useCartStore((state) => state);
 
   return (
     <div className="card card-compact w-[100%] bg-base-100 shadow-xl">
       <figure className="h-[100%]">
+        <div
+          className="flex h-full w-full items-center justify-center"
+          onClick={() => {
+            if (document !== null) {
+              (
+                document.getElementById(
+                  `modal-${product.id}`,
+                )! as HTMLDialogElement
+              ).showModal();
+            }
+          }}
+        >
           <Image
             src={product.imageURL}
             alt="Image of product"
@@ -27,26 +40,59 @@ export default function ProductCard({ product }: Props) {
             width={500}
             height={300}
           />
+        </div>
       </figure>
       <div className="card-body">
-        <div className="flex items-center justify-between">
-          <h2 className="card-title">{product.name}</h2>
-          <h2>R{product.price}</h2>
-        </div>
-        <p className="">{product.description}</p>
-        <div className="card-actions justify-center">
-          <button
-            className="btn bg-blue-500 text-white"
-            onClick={() => {
-              if (!items.includes(product)) {
-                addToCart(product);
-              }
-            }}
-          >
-            Add To Cart
-          </button>
-        </div>
+        <h2 className="card-title">{product.name}</h2>
+        <p>{product.description}</p>
+        <h2 className="font-semibold">R{product.price}</h2>
       </div>
+      <div className="card-actions justify-end p-2">
+        <button
+          className="btn btn-circle bg-blue-500 text-white"
+          onClick={() => {
+            if (!items.includes(product)) {
+              addToCart(product);
+            } else {
+              removeFromCart(product.id.toString());
+            }
+          }}
+        >
+          {items.includes(product) ? (
+            <TrashIcon className="h-6 w-6 text-white" />
+          ) : (
+            <ShoppingCartIcon className="h-6 w-6 text-white" />
+          )}
+        </button>
+      </div>
+      <dialog
+        key={product.id.toString()}
+        id={`modal-${product.id}`}
+        className="modal"
+      >
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <Image
+            key={product.id.toString()}
+            src={product.imageURL}
+            alt="Image of product"
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+            width={500}
+            height={300}
+          />
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 }

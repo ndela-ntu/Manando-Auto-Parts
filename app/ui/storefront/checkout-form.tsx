@@ -30,12 +30,19 @@ type Props = {};
 
 export default function CheckoutForm({}: Props) {
   const { success, addressId } = useAddressStore((state) => state);
+  const { items } = useCartStore((state) => state);
+
+  if (items.length === 0) {
+    return (
+      <div className='flex flex-col items-center justify-center p-10'>
+        <p>Cart is currently empty.</p>
+        <Link className='bg-blue-500 p-2.5 mt-5 rounded-md text-white' href="/storefront">Continue shopping</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-full flex-col px-10">
-      <Link href="/storefront/checkout/cart" className="pt-5">
-        <ArrowLeftIcon className="h-6 w-6 text-black" />
-      </Link>
       <Address />
       <PersonalDetails saveDisabled={!success} addressId={addressId} />
       <Payment buttonsDisabled={!success} />

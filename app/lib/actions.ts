@@ -47,7 +47,16 @@ const ProductSchema = z.object({
     .refine((file: File) => {
       return !file || file.size <= 1024 * 1024 * 3;
     }, 'File size must be less than 3MB'),
-  category: z.enum(['INTERIOR', 'EXTERIOR']),
+  category: z.enum([
+    'BREAKS_AND_WHEELS',
+    'EXTERNAL',
+    'INTERNAL_AND_ENGINE',
+    'GEARBOX',
+    'ELECTRICALS_AND_ELECTRONICS',
+    'EXHAUST',
+    'SUSPENSION',
+    'TRANSMISSION',
+  ]),
 });
 
 export type ProductState = {
@@ -324,14 +333,18 @@ export async function createPersonalDetails(
   }
 }
 
-export async function createInvoice(itemIds: ObjectId[], customerId?: ObjectId, paymentType?: string) {
+export async function createInvoice(
+  itemIds: ObjectId[],
+  customerId?: ObjectId,
+  paymentType?: string,
+) {
   await connectMongo();
   await Invoice.create({
     customer: customerId,
     products: itemIds,
     status: 'Pending',
-    paymentType
+    paymentType,
   });
-  
+
   redirect('/success');
 }

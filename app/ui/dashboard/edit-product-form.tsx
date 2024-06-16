@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import Image from 'next/image';
 import { IProduct } from '@/app/models/product';
 import { updateProduct } from '@/app/lib/actions';
+import { categories } from '@/app/models/categories';
 
 type Props = {
   product: IProduct;
@@ -38,7 +39,7 @@ export default function EditProductForm({ product }: Props) {
               alt="Image of item"
               sizes="20vw"
               style={{
-                width: '30%',
+                width: '10%',
                 height: 'auto',
               }}
               width={150}
@@ -156,8 +157,9 @@ export default function EditProductForm({ product }: Props) {
             name="category"
             className="select select-bordered w-full max-w-xs"
           >
-            <option value="INTERIOR">Interior</option>
-            <option value="EXTERIOR">Exterior</option>
+            {categories.map((category) => (
+              <option value={category}>{category.split('_').join(' ')}</option>
+            ))}
           </select>
           <div id="category" aria-live="polite" aria-atomic="true">
             {state.errors?.category &&

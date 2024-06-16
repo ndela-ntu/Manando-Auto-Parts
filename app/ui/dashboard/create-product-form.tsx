@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { createProduct } from '@/app/lib/actions';
+import { categories } from '@/app/models/categories';
 
 export default function CreateProductForm() {
   const formStatus = useFormStatus();
@@ -18,7 +19,7 @@ export default function CreateProductForm() {
     <form action={dispatch}>
       <div className="mt-5 flex flex-col rounded-md border border-black p-8">
         <div className="mb-4 flex flex-col">
-          <div className="relative w-full flex items-center justify-center rounded-sm border border-black">
+          <div className="relative flex w-full items-center justify-center rounded-sm border border-black">
             {file ? (
               <Image
                 src={URL.createObjectURL(file)}
@@ -145,8 +146,9 @@ export default function CreateProductForm() {
             name="category"
             className="select select-bordered w-full max-w-xs"
           >
-            <option value="INTERIOR">Interior</option>
-            <option value="EXTERIOR">Exterior</option>
+            {categories.map((category) => (
+              <option value={category}>{category.split('_').join(' ')}</option>
+            ))}
           </select>
           <div id="category" aria-live="polite" aria-atomic="true">
             {state.errors?.category &&

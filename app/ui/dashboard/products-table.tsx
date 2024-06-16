@@ -38,7 +38,7 @@ export default function ProductsTable({ products }: Props) {
               <td>{product.description}</td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>
-              <td>{product.category}</td>
+              <td>{product.category.split('_').join(' ')}</td>
               <td>
                 <div className="flex flex-row space-x-2">
                   <EditProduct id={product.id.toString()} />

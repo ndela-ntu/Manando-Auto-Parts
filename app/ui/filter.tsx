@@ -37,7 +37,6 @@ export default function Filter() {
         className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
       >
         <li
-        key={'ALL'}
           onClick={() => {
             handleFilter(undefined);
           }}
@@ -46,8 +45,8 @@ export default function Filter() {
         </li>
         <div className="divider p-0"></div>
         {categories.map((category, key) => (
-          <div>
-            <li key={key}
+          <div key={key}>
+            <li 
               onClick={() => {
                 handleFilter(category);
               }}

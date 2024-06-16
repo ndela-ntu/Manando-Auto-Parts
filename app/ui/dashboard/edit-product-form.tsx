@@ -157,8 +157,8 @@ export default function EditProductForm({ product }: Props) {
             name="category"
             className="select select-bordered w-full max-w-xs"
           >
-            {categories.map((category) => (
-              <option value={category}>{category.split('_').join(' ')}</option>
+            {categories.map((category, i) => (
+              <option key={i} value={category}>{category.split('_').join(' ')}</option>
             ))}
           </select>
           <div id="category" aria-live="polite" aria-atomic="true">

@@ -44,9 +44,9 @@ export default function Filter() {
           ALL
         </li>
         <div className="divider p-0"></div>
-        {categories.map((category) => (
+        {categories.map((category, i) => (
           <div>
-            <li
+            <li key={i}
               onClick={() => {
                 handleFilter(category);
               }}

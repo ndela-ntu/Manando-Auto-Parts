@@ -171,7 +171,7 @@ export default function EditProductForm({ product }: Props) {
           </div>
         </div>
         <button
-          className="btn h-10 rounded-md bg-[#2563EB] text-sm text-white transition-colors hover:bg-[#326AE2]"
+          className="btn h-10 rounded-md bg-[#2563EB] text-sm text-[#E8E9ED] transition-colors hover:bg-[#326AE2]"
           disabled={formStatus.pending}
           type="submit"
         >

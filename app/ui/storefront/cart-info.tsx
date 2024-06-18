@@ -15,7 +15,7 @@ export default function CartInfo() {
     return (
       <div className='flex flex-col items-center justify-center p-10'>
         <p>Cart is currently empty.</p>
-        <Link className='bg-blue-500 p-2.5 mt-5 rounded-md text-white' href="/storefront">Continue shopping</Link>
+        <Link className='bg-[#816C61] p-2.5 mt-5 rounded-md text-[#E8E9ED]' href="/storefront">Continue shopping</Link>
       </div>
     );
   }
@@ -40,10 +40,10 @@ export default function CartInfo() {
         className="fixed bottom-1 right-1"
         href="/storefront/checkout/checkout-details"
       >
-        <div className="flex items-center justify-center rounded-xl bg-blue-500 p-2.5">
-          <span className="text-white">Continue</span>
+        <div className="flex items-center justify-center rounded-xl bg-[#816C61] p-2.5">
+          <span className="text-[#E8E9ED]">Continue</span>
           <div className="px-2">
-            <ArrowRightIcon className="h-6 w-6 text-white" />
+            <ArrowRightIcon className="h-6 w-6 text-[#E8E9ED]" />
           </div>
         </div>
       </Link>

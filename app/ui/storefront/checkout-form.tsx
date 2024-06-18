@@ -36,7 +36,7 @@ export default function CheckoutForm({}: Props) {
     return (
       <div className='flex flex-col items-center justify-center p-10'>
         <p>Cart is currently empty.</p>
-        <Link className='bg-blue-500 p-2.5 mt-5 rounded-md text-white' href="/storefront">Continue shopping</Link>
+        <Link className='bg-[#816C61] p-2.5 mt-5 rounded-md text-[#E8E9ED]' href="/storefront">Continue shopping</Link>
       </div>
     );
   }
@@ -87,7 +87,7 @@ function PersonalDetails({
           Personal Details
         </h1>
         <button className="btn btn-circle btn-success">
-          <CheckIcon className="h-6 w-6 text-white" />
+          <CheckIcon className="h-6 w-6 text-[#E8E9ED]" />
         </button>
       </div>
     );
@@ -190,7 +190,7 @@ function Address() {
           Address
         </h1>
         <button className="btn btn-circle btn-success">
-          <CheckIcon className="h-6 w-6 text-white" />
+          <CheckIcon className="h-6 w-6 text-[#E8E9ED]" />
         </button>
       </div>
     );
@@ -304,7 +304,7 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
               }}
               disabled={buttonsDisabled}
             >
-              <BanknotesIcon className="h-6 w-6 text-white" />
+              <BanknotesIcon className="h-6 w-6 text-[#E8E9ED]" />
               Cash
             </button>
           )}
@@ -321,7 +321,7 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
               }}
               disabled={buttonsDisabled}
             >
-              <CreditCardIcon className="h-6 w-6 text-white" />
+              <CreditCardIcon className="h-6 w-6 text-[#E8E9ED]" />
               Card
             </button>
           )}

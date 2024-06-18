@@ -14,12 +14,12 @@ export default function CartIcon() {
           className="fixed bottom-1 right-1"
           href="/storefront/checkout/cart"
         >
-          <div className="flex items-center justify-center rounded-xl bg-blue-500 p-2.5">
+          <div className="flex items-center justify-center rounded-xl bg-[#816C61] p-2.5">
             <div className="px-2">
-              <ShoppingCartIcon className="h-6 w-6 text-white" />
+              <ShoppingCartIcon className="h-6 w-6 text-[#E8E9ED]" />
             </div>
-            <span className="text-white">Checkout</span>
-            <span className="px-2 text-white">{items.length}</span>
+            <span className="text-[#E8E9ED]">Checkout</span>
+            <span className="px-2 text-[#E8E9ED]">{items.length}</span>
           </div>
         </Link>
       )}

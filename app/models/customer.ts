@@ -3,7 +3,7 @@ import mongoose, { Schema, model, models } from 'mongoose';
 export interface ICustomer {
   id?: mongoose.Schema.Types.ObjectId;
   fullNames: string;
-  email: string;
+  email?: string;
   phoneNumber: number;
   address: {};
 }

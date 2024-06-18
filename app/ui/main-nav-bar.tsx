@@ -54,40 +54,40 @@ const MainNavbar = () => {
           className="block p-2.5 md:hidden"
         >
           {showNavList ? (
-            <XCircleIcon className="h-6 w-6 text-white" />
+            <XCircleIcon className="h-6 w-6 text-[#E8E9ED]" />
           ) : (
-            <Bars3Icon className="h-6 w-6 text-white" />
+            <Bars3Icon className="h-6 w-6 text-[#E8E9ED]" />
           )}
         </button>
 
         <ul
           className={
             showNavList
-              ? 'fixed left-0 top-0 h-full w-[70%] bg-blue-500 py-5 duration-300 ease-in-out md:hidden'
+              ? 'fixed left-0 top-0 h-full w-[70%] bg-[#816C61] py-5 duration-300 ease-in-out md:hidden'
               : 'fixed bottom-0 left-[-100%] top-0 w-[70%] duration-300 ease-in-out'
           }
         >
           <li className="sm:px-2 lg:px-2">
             <Link href="/contact-us">
               <div className="flex items-center justify-between p-2.5">
-                <span className=" text-white">Contact Us</span>
-                <PhoneIcon className="h-6 w-6 text-white" />
+                <span className=" text-[#E8E9ED]">Contact Us</span>
+                <PhoneIcon className="h-6 w-6 text-[#E8E9ED]" />
               </div>
             </Link>
           </li>
           <li className="sm:px-2 lg:px-2">
             <Link href="/about-us">
               <div className="flex items-center justify-between p-2.5">
-                <span className="text-white">About Us</span>
-                <DocumentTextIcon className="h-6 w-6 text-white" />
+                <span className="text-[#E8E9ED]">About Us</span>
+                <DocumentTextIcon className="h-6 w-6 text-[#E8E9ED]" />
               </div>
             </Link>
           </li>
           <li className="sm:px-2 lg:px-2">
             <Link href="/dashboard">
               <div className="flex items-center justify-between p-2.5">
-                <span className="text-white">Dashboard</span>
-                <UserIcon className="h-6 w-6 text-white" />
+                <span className="text-[#E8E9ED]">Dashboard</span>
+                <UserIcon className="h-6 w-6 text-[#E8E9ED]" />
               </div>
             </Link>
           </li>

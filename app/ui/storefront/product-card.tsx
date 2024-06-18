@@ -49,7 +49,7 @@ export default function ProductCard({ product }: Props) {
       </div>
       <div className="card-actions justify-end p-2">
         <button
-          className="btn btn-circle bg-blue-500 text-white"
+          className="btn btn-circle bg-[#816C61] text-[#E8E9ED]"
           onClick={() => {
             if (!items.includes(product)) {
               addToCart(product);
@@ -59,9 +59,9 @@ export default function ProductCard({ product }: Props) {
           }}
         >
           {items.includes(product) ? (
-            <TrashIcon className="h-6 w-6 text-white" />
+            <TrashIcon className="h-6 w-6 text-[#E8E9ED]" />
           ) : (
-            <ShoppingCartIcon className="h-6 w-6 text-white" />
+            <ShoppingCartIcon className="h-6 w-6 text-[#E8E9ED]" />
           )}
         </button>
       </div>

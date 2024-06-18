@@ -9,7 +9,7 @@ export default function CategoryCard({
   imageSRC: string;
 }) {
   return (
-    <div className="card card-compact w-[100%] bg-base-100 shadow-xl">
+    <div className="card card-compact w-[100%] bg-base-100 shadow-xl bg-[#E8E9ED]">
       <div className="card-body">
         <Link href={`/storefront?filterBy=${name.split(' ').join('_')}`}>
           <Image
@@ -23,7 +23,7 @@ export default function CategoryCard({
             width={500}
             height={300}
           />
-          <h2 className="card-title">{name}</h2>
+          <h2 className="card-title py-2.5">{name}</h2>
         </Link>
       </div>
     </div>

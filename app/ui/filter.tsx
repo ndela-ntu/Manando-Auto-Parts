@@ -28,9 +28,9 @@ export default function Filter() {
       <div
         tabIndex={0}
         role="button"
-        className="btn rounded-md bg-blue-500 p-2.5"
+        className="btn rounded-md bg-[#816C61] p-2.5"
       >
-        <FunnelIcon className="h-6 w-6 text-white" />
+        <FunnelIcon className="h-6 w-6 text-[#E8E9ED]" />
       </div>
       <ul
         tabIndex={0}

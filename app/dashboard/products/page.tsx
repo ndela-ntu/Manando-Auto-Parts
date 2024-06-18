@@ -18,7 +18,7 @@ export default async function Page() {
       </div>
       <Link
         href="/dashboard/products/create"
-        className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-sm text-white transition-colors hover:bg-blue-400"
+        className="mt-4 rounded-md bg-[#816C61] px-4 py-2 text-sm text-[#E8E9ED] transition-colors hover:bg-blue-400"
       >
         Add new product
       </Link>

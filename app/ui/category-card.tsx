@@ -9,7 +9,7 @@ export default function CategoryCard({
   imageSRC: string;
 }) {
   return (
-    <div className="card card-compact w-[100%] bg-base-100 shadow-xl bg-[#E8E9ED]">
+    <div className="card card-compact w-[100%] shadow-xl bg-[#E8E9ED]">
       <div className="card-body">
         <Link href={`/storefront?filterBy=${name.split(' ').join('_')}`}>
           <Image

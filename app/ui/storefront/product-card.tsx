@@ -15,7 +15,7 @@ export default function ProductCard({ product }: Props) {
   const { items, addToCart, removeFromCart } = useCartStore((state) => state);
 
   return (
-    <div className="card card-compact w-[100%] bg-base-100 shadow-xl">
+    <div className="card card-compact w-[100%] shadow-xl bg-[#E8E9ED]">
       <figure className="h-[100%]">
         <div
           className="flex h-full w-full items-center justify-center"
@@ -47,7 +47,8 @@ export default function ProductCard({ product }: Props) {
         <p>{product.description}</p>
         <h2 className="font-semibold">R{product.price}</h2>
       </div>
-      <div className="card-actions justify-end p-2">
+      <div className="divider"></div>
+      <div className="card-actions justify-end p-1">
         <button
           className="btn btn-circle bg-[#816C61] text-[#E8E9ED]"
           onClick={() => {

@@ -10,7 +10,7 @@ export default function Welcome() {
           <h2 className="p-5 text-center text-3xl text-[#E8E9ED] md:text-4xl lg:text-5xl">
             Welcome to Manando Auto Parts
           </h2>
-          <p className="text-[#E8E9ED] px-10 text-center">We buy and sell used/second hand car parts</p>
+          <p className="text-[#FABC3C] px-10 text-center text-base md:text-lg">We buy and sell used/second hand car parts</p>
         </div>
         <div className="static h-[200px] w-full overflow-hidden md:h-[300px]">
           <Image

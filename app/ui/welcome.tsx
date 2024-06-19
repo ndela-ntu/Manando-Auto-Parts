@@ -10,7 +10,7 @@ export default function Welcome() {
           <h2 className="p-5 text-center text-3xl text-[#E8E9ED] md:text-4xl lg:text-5xl">
             Welcome to Manando Auto Parts
           </h2>
-          <p className="text-[#E8E9ED] italic">We buy and sell used car parts</p>
+          <p className="text-[#E8E9ED] px-10 text-center">We buy and sell used/second hand car parts</p>
         </div>
         <div className="static h-[200px] w-full overflow-hidden md:h-[300px]">
           <Image
@@ -21,9 +21,8 @@ export default function Welcome() {
           />
         </div>
       </div>
-      <div className="divider"></div>
       <div className="flex flex-col items-center">
-        <p className="pb-5 text-xl text-[#E8E9ED]">Looking to:</p>
+        <p className="py-5 text-xl text-[#E8E9ED]">Looking to:</p>
         <div className="flex justify-evenly space-x-10">
           <Link
             className="rounded-md bg-[#816C61] p-2.5 text-[#E8E9ED]"
@@ -39,7 +38,6 @@ export default function Welcome() {
           </Link>
         </div>
       </div>
-      <div className="divider"></div>
     </div>
   );
 }

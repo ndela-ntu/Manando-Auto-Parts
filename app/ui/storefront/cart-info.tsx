@@ -13,7 +13,7 @@ export default function CartInfo() {
 
   if (items.length === 0) {
     return (
-      <div className='flex flex-col items-center justify-center p-10'>
+      <div className='flex flex-col items-center justify-center p-10 h-screen text-[#E8E9ED]'>
         <p>Cart is currently empty.</p>
         <Link className='bg-[#816C61] p-2.5 mt-5 rounded-md text-[#E8E9ED]' href="/storefront">Continue shopping</Link>
       </div>
@@ -21,7 +21,7 @@ export default function CartInfo() {
   }
 
   return (
-    <div className="p-5">
+    <div className="p-5 h-screen text-[#E8E9ED]">
       <div className="flex flex-col space-y-10">
         <div>
           <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>

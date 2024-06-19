@@ -3,8 +3,8 @@ import CategoryCard from './category-card';
 
 export default function Main() {
   return (
-    <div className='flex flex-col items-center justify-center px-10'>
-      <h3 className="text-xl pb-5 text-[#E8E9ED]">We have:</h3>
+    <div className='flex flex-col items-center justify-center px-10 py-5'>
+      <h3 className="text-lg pb-5 text-[#E8E9ED]">{`Car parts available (by category):`}</h3>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-5'>
       {categories.map((category, i) => (
         <CategoryCard

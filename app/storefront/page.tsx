@@ -35,15 +35,14 @@ export default async function Page({
   }
 
   return (
-    <div>
       <div className="py-5">
         <div className="flex items-center justify-center space-x-4 p-5 md:space-x-5 lg:space-x-6">
           <Search placeholder="Search parts..." />
           <Filter />
         </div>
         {products.length === 0 ? (
-          <div className="flex items-center justify-center py-5">
-            <p>No products found.</p>
+          <div className="flex items-center justify-center py-5 text-[#E8E9ED]">
+            <p>No products found. <a href='tel:+27786020598'>Contact us</a></p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-5 px-5 md:grid-cols-3 lg:grid-cols-4">
@@ -56,6 +55,5 @@ export default async function Page({
           </div>
         )}
       </div>
-    </div>
   );
 }

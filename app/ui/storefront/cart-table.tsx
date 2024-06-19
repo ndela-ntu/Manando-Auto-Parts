@@ -9,13 +9,13 @@ export default function CardTable() {
   const { items, removeFromCart } = useCartStore((state) => state);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto text-[#E8E9ED]">
       <table className="table">
         <thead>
           <tr>
             <th className="hidden md:block"></th>
-            <th>Name</th>
-            <th>Price</th>
+            <th className='text-[#E8E9ED]'>Name</th>
+            <th className='text-[#E8E9ED]'>Price</th>
             <th></th>
           </tr>
         </thead>
@@ -45,7 +45,7 @@ export default function CardTable() {
                   }}
                 >
                   <span className="sr-only">Delete</span>
-                  <TrashIcon className="h-3 w-3 text-black" />
+                  <TrashIcon className="h-3 w-3 text-[#E8E9ED]" />
                 </button>
               </td>
             </tr>

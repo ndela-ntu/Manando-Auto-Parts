@@ -7,10 +7,11 @@ import BuyOrSellCard from './ui/buy-sell';
 import Welcome from './ui/welcome';
 import Main from './ui/main';
 import MainNavbar from './ui/main-nav-bar';
+import ContactDetails from './ui/contact-details';
 
 export default function Page() {
   return (
-    <div>
+    <div className='h-full'>
       <header className="bg-blue sticky left-0 right-0 top-0 z-10 flex w-full flex-row items-center justify-between space-y-5 bg-[#002134] p-5 py-2 text-[#E8E9ED]">
         <AcmeLogo />
         <MainNavbar />
@@ -19,6 +20,9 @@ export default function Page() {
         <Welcome />
         <Main />
       </main>
+      <footer>
+        <ContactDetails />
+      </footer>
     </div>
   );
 }

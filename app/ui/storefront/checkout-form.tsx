@@ -34,9 +34,14 @@ export default function CheckoutForm({}: Props) {
 
   if (items.length === 0) {
     return (
-      <div className='flex flex-col items-center justify-center p-10'>
+      <div className="flex flex-col items-center justify-center p-10 text-white h-screen">
         <p>Cart is currently empty.</p>
-        <Link className='bg-[#816C61] p-2.5 mt-5 rounded-md text-[#E8E9ED]' href="/storefront">Continue shopping</Link>
+        <Link
+          className="mt-5 rounded-md bg-[#816C61] p-2.5 text-[#E8E9ED]"
+          href="/storefront"
+        >
+          Continue shopping
+        </Link>
       </div>
     );
   }
@@ -82,7 +87,7 @@ function PersonalDetails({
 
   if (state.isSuccess) {
     return (
-      <div className="flex flex-col py-10">
+      <div className="flex flex-col py-10 text-[#E8E9ED]">
         <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
           Personal Details
         </h1>
@@ -95,7 +100,7 @@ function PersonalDetails({
 
   return (
     <form action={dispatch}>
-      <div className="flex flex-col py-10">
+      <div className="flex flex-col py-10 text-[#E8E9ED]">
         <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
           Personal Details
         </h1>
@@ -109,6 +114,7 @@ function PersonalDetails({
             id="fullNames"
             placeholder="Full names"
             required
+            className="input input-bordered w-full max-w-xs"
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             {state.errors?.fullNames &&
@@ -123,7 +129,13 @@ function PersonalDetails({
           <label htmlFor="email" className="">
             Email
           </label>
-          <input type="email" name="email" id="email" placeholder="Email" />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            className="input input-bordered w-full max-w-xs"
+          />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             {state.errors?.email &&
               state.errors.email.map((error: string, i) => (
@@ -143,6 +155,7 @@ function PersonalDetails({
             id="phoneNumber"
             placeholder="Full names"
             required
+            className="input input-bordered w-full max-w-xs"
           />
         </div>
         <div id="name-error" aria-live="polite" aria-atomic="true">
@@ -153,7 +166,7 @@ function PersonalDetails({
               </p>
             ))}
         </div>
-        <button className="btn mt-5" type="submit" disabled={saveDisabled}>
+        <button className="btn mt-5 bg-[#816C61] text-[#E8E9ED]" type="submit" disabled={saveDisabled}>
           Save
         </button>
       </div>
@@ -185,7 +198,7 @@ function Address() {
 
   if (state.isSuccess) {
     return (
-      <div className="flex flex-col py-10">
+      <div className="flex flex-col py-10 text-[#E8E9ED]">
         <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
           Address
         </h1>
@@ -198,7 +211,7 @@ function Address() {
 
   return (
     <form action={dispatch}>
-      <div className="flex flex-col py-10">
+      <div className="flex flex-col py-10 text-[#E8E9ED]">
         <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
           Address
         </h1>
@@ -212,6 +225,7 @@ function Address() {
             id="address"
             placeholder="Address"
             required
+            className="input input-bordered w-full max-w-xs"
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             {state.errors?.streetAddress &&
@@ -232,6 +246,7 @@ function Address() {
             id="city"
             placeholder="City"
             required
+            className="input input-bordered w-full max-w-xs"
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             {state.errors?.city &&
@@ -253,6 +268,7 @@ function Address() {
             id="postalCode"
             placeholder="Postal Code"
             required
+            className="input input-bordered w-full max-w-xs"
           />
           <div id="name-error" aria-live="polite" aria-atomic="true">
             {state.errors?.postalCode &&
@@ -263,7 +279,7 @@ function Address() {
               ))}
           </div>
         </div>
-        <button className="btn mt-5" type="submit">
+        <button className="btn mt-5 bg-[#816C61] text-[#E8E9ED]" type="submit">
           Save
         </button>
       </div>
@@ -272,7 +288,9 @@ function Address() {
 }
 
 function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
-  const [paymentType, setPaymentType] = useState<'Cash' | 'Card' | undefined>(undefined);
+  const [paymentType, setPaymentType] = useState<'Cash' | 'Card' | undefined>(
+    undefined,
+  );
   const { items } = useCartStore((state) => state);
   const { customer } = useCustomerStore((state) => state);
 
@@ -280,15 +298,15 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
     null,
     items.map((item) => item.id),
     customer.id,
-    paymentType
+    paymentType,
   );
-  
+
   return (
     <form action={createInvoiceWithIds}>
-      <div className="flex flex-col py-10">
+      <div className="flex flex-col py-10 text-[#E8E9ED]">
         <div className="flex flex-row items-center space-x-4">
           <ArrowLeftCircleIcon
-            className="h-8 w-8 text-black"
+            className="h-8 w-8 text-[#E8E9ED]"
             onClick={() => {
               setPaymentType(undefined);
             }}
@@ -298,7 +316,7 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
         <div className="flex flex-row justify-center sm:justify-between">
           {paymentType == undefined && (
             <button
-              className="btn"
+              className="btn bg-[#816C61] text-[#E8E9ED]"
               onClick={() => {
                 setPaymentType('Cash');
               }}
@@ -315,7 +333,7 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
           )}
           {paymentType == undefined && (
             <button
-              className="btn"
+              className="btn bg-[#816C61] text-[#E8E9ED]"
               onClick={() => {
                 setPaymentType('Card');
               }}

@@ -13,6 +13,7 @@ import Address from '../models/address';
 import Customer, { ICustomer } from '../models/customer';
 import mongoose, { ObjectId } from 'mongoose';
 import Invoice from '../models/invoice';
+import SellItem from '../models/sell-item';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -45,7 +46,7 @@ const ProductSchema = z.object({
     .instanceof(File)
     .refine((file: File) => file.size !== 0, 'Image is required')
     .refine((file: File) => {
-      return !file || file.size <= 1024 * 1024 * 3;
+      return !file || file.size <= 1024 * 1024 * 5;
     }, 'File size must be less than 3MB'),
   category: z.enum([
     'BREAKS_AND_WHEELS',
@@ -346,5 +347,73 @@ export async function createInvoice(
     paymentType,
   });
 
+  redirect('/success');
+}
+
+export type SellItemState = {
+  errors?: {
+    image?: string[];
+    fullNames?: string[];
+    email?: string[];
+    phoneNumber?: string[];
+  };
+  message?: string | null;
+};
+
+const SellItemSchema = z.object({
+  id: z.string(),
+  image: z
+    .instanceof(File)
+    .refine((file: File) => file.size !== 0, 'Image is required')
+    .refine((file: File) => {
+      return !file || file.size <= 1024 * 1024 * 5;
+    }, 'File size must be less than 3MB'),
+  fullNames: z.string().min(1, { message: 'Full names required' }),
+  email: z.string().min(0, { message: 'Email is required' }),
+  phoneNumber: z.coerce.number().gt(0, { message: 'Number is required' }),
+});
+
+const CreateSellItemSchema = SellItemSchema.omit({ id: true });
+
+export async function createSellItem(
+  prevState: SellItemState,
+  formData: FormData,
+) {
+  const validatedFields = CreateSellItemSchema.safeParse({
+    image: formData.get('image'),
+    fullNames: formData.get('fullNames'),
+    email: formData.get('email'),
+    phoneNumber: formData.get('phoneNumber'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missed fields, failed to create product.',
+    };
+  }
+
+  try {
+    const { image, fullNames, email, phoneNumber } = validatedFields.data;
+
+    const result = await uploadImage(image);
+
+    if (result) {
+      let { url, publicId } = result;
+
+      await connectMongo();
+      await SellItem.create({
+        imagePublicId: publicId,
+        imageURL: url,
+        fullNames,
+        email,
+        phoneNumber
+      });
+    }
+  } catch (error) {
+    return {
+      message: 'Error from server',
+    };
+  }
   redirect('/success');
 }

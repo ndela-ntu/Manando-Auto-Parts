@@ -34,7 +34,7 @@ export default function CheckoutForm({}: Props) {
 
   if (items.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-10 text-white h-screen">
+      <div className="flex h-screen flex-col items-center justify-center p-10 text-white">
         <p>Cart is currently empty.</p>
         <Link
           className="mt-5 rounded-md bg-[#816C61] p-2.5 text-[#E8E9ED]"
@@ -157,16 +157,21 @@ function PersonalDetails({
             required
             className="input input-bordered w-full max-w-xs"
           />
+          <div id="name-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.phoneNumber &&
+              state.errors.phoneNumber.map((error: string, i) => (
+                <p key={i} className="text-sm text-red-500">
+                  {error}
+                </p>
+              ))}
+          </div>
         </div>
-        <div id="name-error" aria-live="polite" aria-atomic="true">
-          {state.errors?.phoneNumber &&
-            state.errors.phoneNumber.map((error: string, i) => (
-              <p key={i} className="text-sm text-red-500">
-                {error}
-              </p>
-            ))}
-        </div>
-        <button className="btn mt-5 bg-[#816C61] text-[#E8E9ED]" type="submit" disabled={saveDisabled}>
+
+        <button
+          className="btn mt-5 bg-[#816C61] text-[#E8E9ED]"
+          type="submit"
+          disabled={saveDisabled}
+        >
           Save
         </button>
       </div>

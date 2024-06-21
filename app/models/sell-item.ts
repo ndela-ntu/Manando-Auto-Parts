@@ -1,15 +1,17 @@
 import { Schema, model, models } from "mongoose";
 
 export interface ISellItem {
+  imagePublicId: string;
   imageURL: string;
-  username: string;
+  fullNames: string;
   email?: string;
   phoneNumber?: number;
 }
 
 const SellItemSchema = new Schema<ISellItem>({
+    imagePublicId: String,
     imageURL: String,
-    username: String,
+    fullNames: String,
     email: String,
     phoneNumber: Number
 }, {

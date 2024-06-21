@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { createProduct } from '@/app/lib/actions';
 import { categories } from '@/app/models/categories';
 
@@ -147,7 +146,9 @@ export default function CreateProductForm() {
             className="select select-bordered w-full max-w-xs"
           >
             {categories.map((category, i) => (
-              <option key={i} value={category}>{category.split('_').join(' ')}</option>
+              <option key={i} value={category}>
+                {category.split('_').join(' ')}
+              </option>
             ))}
           </select>
           <div id="category" aria-live="polite" aria-atomic="true">

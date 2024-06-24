@@ -2,11 +2,8 @@ import { CheckIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import React from 'react';
 
-type Props = {
-  type: 'Purchase' | 'Sell';
-};
 
-export default function Page({}: Props) {
+export default function Page() {
   return (
     <main className="flex h-screen flex-col items-center justify-center p-10">
       <button className="btn btn-circle btn-success">

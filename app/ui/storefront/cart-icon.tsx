@@ -1,15 +1,15 @@
 'use client';
 
-import { useCartStore } from '@/app/providers/cart-store-provider';
+import { useCart } from '@/app/context/cart-context';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export default function CartIcon() {
-  const { items } = useCartStore((state) => state);
+ const { cart } = useCart();
 
   return (
     <>
-      {items.length !== 0 && (
+      {cart.length !== 0 && (
         <Link
           className="fixed bottom-1 right-1"
           href="/storefront/checkout/cart"
@@ -19,7 +19,7 @@ export default function CartIcon() {
               <ShoppingCartIcon className="h-6 w-6 text-[#E8E9ED]" />
             </div>
             <span className="text-[#E8E9ED]">Checkout</span>
-            <span className="px-2 text-[#E8E9ED]">{items.length}</span>
+            <span className="px-2 text-[#E8E9ED]">{cart.length}</span>
           </div>
         </Link>
       )}

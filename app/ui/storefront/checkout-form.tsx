@@ -22,17 +22,17 @@ import {
 } from '@/app/providers/address-store-provider';
 import { ArrowLeftCircleIcon } from '@heroicons/react/20/solid';
 import Link from 'next/link';
-import { useCartStore } from '@/app/providers/cart-store-provider';
 import { lusitana } from '@/app/ui/fonts';
 import { useCustomerStore } from '@/app/providers/customer-store-provider';
+import { useCart } from '@/app/context/cart-context';
 
 type Props = {};
 
 export default function CheckoutForm({}: Props) {
   const { success, addressId } = useAddressStore((state) => state);
-  const { items } = useCartStore((state) => state);
+  const { cart } = useCart();
 
-  if (items.length === 0) {
+  if (cart.length === 0) {
     return (
       <div className="flex h-screen flex-col items-center justify-center p-10 text-white">
         <p>Cart is currently empty.</p>
@@ -296,12 +296,12 @@ function Payment({ buttonsDisabled }: { buttonsDisabled: boolean }) {
   const [paymentType, setPaymentType] = useState<'Cash' | 'Card' | undefined>(
     undefined,
   );
-  const { items } = useCartStore((state) => state);
+  const { cart } = useCart();
   const { customer } = useCustomerStore((state) => state);
 
   const createInvoiceWithIds = createInvoice.bind(
     null,
-    items.map((item) => item.id),
+    cart.map((item) => item.id),
     customer.id,
     paymentType,
   );

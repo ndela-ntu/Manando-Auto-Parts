@@ -10,7 +10,6 @@ import {
   UserIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useCartStore } from '@/app/providers/cart-store-provider';
 
 const MainNavbar = () => {
   const [showNavList, setShowNavList] = useState(false);

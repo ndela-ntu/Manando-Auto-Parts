@@ -2,11 +2,9 @@
 
 import { useCart } from '@/app/context/cart-context';
 import { IProduct } from '@/app/models/product';
-import { useCartStore } from '@/app/providers/cart-store-provider';
 import { ShoppingCartIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 
 type Props = {
   product: IProduct;

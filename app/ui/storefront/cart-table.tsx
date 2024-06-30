@@ -3,10 +3,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { TrashIcon } from '@heroicons/react/24/outline';
-import { useCartStore } from '@/app/providers/cart-store-provider';
+import { useCart } from '@/app/context/cart-context';
 
 export default function CardTable() {
-  const { items, removeFromCart } = useCartStore((state) => state);
+  const { cart, removeItem } = useCart();
 
   return (
     <div className="overflow-x-auto text-[#E8E9ED]">
@@ -20,7 +20,7 @@ export default function CardTable() {
           </tr>
         </thead>
         <tbody>
-          {items.map((product) => (
+          {cart.map((product) => (
             <tr key={product.id.toString()}>
               <td className="hidden md:block">
                 <Image
@@ -41,7 +41,7 @@ export default function CardTable() {
                 <button
                   className="rounded-md border p-2 hover:bg-gray-100"
                   onClick={() => {
-                    removeFromCart(product.id.toString());
+                    removeItem(product.id.toString());
                   }}
                 >
                   <span className="sr-only">Delete</span>
@@ -50,7 +50,7 @@ export default function CardTable() {
               </td>
             </tr>
           ))}
-          {items.length == 0 && <tr>No products</tr>}
+          {cart.length == 0 && <tr>No products</tr>}
         </tbody>
       </table>
     </div>

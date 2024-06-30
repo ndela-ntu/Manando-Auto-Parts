@@ -6,12 +6,12 @@ import CartTable from '@/app/ui/storefront/cart-table';
 import SummaryTable from '@/app/ui/storefront/summary-table';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { useCartStore } from '@/app/providers/cart-store-provider';
+import { useCart } from '@/app/context/cart-context';
 
 export default function CartInfo() {
-  const { items } = useCartStore((state) => state);
+  const { cart } = useCart();
 
-  if (items.length === 0) {
+  if (cart.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center p-10 h-screen text-[#E8E9ED]'>
         <p>Cart is currently empty.</p>

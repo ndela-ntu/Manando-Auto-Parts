@@ -11,7 +11,6 @@ import {
   UserIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useCartStore } from '@/app/providers/cart-store-provider';
 import { useCart } from '@/app/context/cart-context';
 import { IProduct } from '@/app/models/product';
 
@@ -23,7 +22,6 @@ const Navbar = () => {
   const toggleNavList = () => setShowNavList(!showNavList);
 
   useEffect(() => {
-
     setLocalCart(cart);
   }, [cart])
 

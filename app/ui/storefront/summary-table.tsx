@@ -1,12 +1,12 @@
 'use client';
 
-import { useCartStore } from '@/app/providers/cart-store-provider';
+import { useCart } from '@/app/context/cart-context';
 import React from 'react';
 
 export default function SummaryTable() {
-  const { items } = useCartStore((state) => state);
+  const { cart } = useCart();
 
-  const total = items.reduce(
+  const total = cart.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     0,
   );

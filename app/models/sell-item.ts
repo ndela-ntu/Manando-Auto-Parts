@@ -25,5 +25,5 @@ const SellItemSchema = new Schema<ISellItem>({
     },
 })
 
-const SellItem = models.SellItemSchema || model('SellItem', SellItemSchema);
+const SellItem = models.SellItemSchema
 export default SellItem;

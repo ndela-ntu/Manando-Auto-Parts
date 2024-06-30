@@ -1,5 +1,6 @@
 'use client';
 
+import { useCart } from '@/app/context/cart-context';
 import { IProduct } from '@/app/models/product';
 import { useCartStore } from '@/app/providers/cart-store-provider';
 import { ShoppingCartIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -12,39 +13,40 @@ type Props = {
 };
 
 export default function ProductCard({ product }: Props) {
-  const { items, addToCart, removeFromCart } = useCartStore((state) => state);
+  const { cart, addItem, removeItem, clearCart } = useCart();
 
   return (
-    <div className="card card-compact w-[100%] shadow-xl bg-[#E8E9ED]">
-      <figure className="h-[100%]">
-        <div
-          className="flex h-full w-full items-center justify-center"
-          onClick={() => {
-            if (document !== null) {
+    <div className="card card-compact w-[100%] bg-[#E8E9ED] shadow-xl">
+      <Link href={`/storefront/${product.id.toString()}`}>
+        <figure className="h-[100%]">
+          <div
+            className="flex h-full w-full items-center justify-center"
+            onClick={() => {
+              /* if (document !== null) {
               (
                 document.getElementById(
                   `modal-${product.id}`,
                 )! as HTMLDialogElement
               ).showModal();
-            }
-          }}
-        >
-          <Image
-            src={product.imageURL}
-            alt="Image of product"
-            sizes="100vw"
-            style={{
-              width: '50%',
-              height: 'auto',
+            } */
             }}
-            width={500}
-            height={300}
-          />
-        </div>
-      </figure>
+          >
+            <Image
+              src={product.imageURL}
+              alt="Image of product"
+              sizes="100vw"
+              style={{
+                width: '50%',
+                height: 'auto',
+              }}
+              width={500}
+              height={300}
+            />
+          </div>
+        </figure>
+      </Link>
       <div className="card-body">
         <h2 className="card-title">{product.name}</h2>
-        <p>{product.description}</p>
         <h2 className="font-semibold">R{product.price}</h2>
       </div>
       <div className="divider"></div>
@@ -52,21 +54,22 @@ export default function ProductCard({ product }: Props) {
         <button
           className="btn btn-circle bg-[#816C61] text-[#E8E9ED]"
           onClick={() => {
-            if (!items.includes(product)) {
-              addToCart(product);
+            if (!cart.find((item) => item.id === product.id)) {
+              addItem(product);
             } else {
-              removeFromCart(product.id.toString());
+              removeItem(product.id.toString());
             }
           }}
         >
-          {items.includes(product) ? (
+          {cart.find((item) => item.id === product.id) ? (
             <TrashIcon className="h-6 w-6 text-[#E8E9ED]" />
           ) : (
             <ShoppingCartIcon className="h-6 w-6 text-[#E8E9ED]" />
           )}
         </button>
       </div>
-      <dialog
+
+      {/* <dialog
         key={product.id.toString()}
         id={`modal-${product.id}`}
         className="modal"
@@ -93,7 +96,7 @@ export default function ProductCard({ product }: Props) {
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>
-      </dialog>
+      </dialog> */}
     </div>
   );
 }

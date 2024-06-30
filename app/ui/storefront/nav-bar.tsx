@@ -12,13 +12,14 @@ import {
   XCircleIcon,
 } from '@heroicons/react/24/outline';
 import { useCartStore } from '@/app/providers/cart-store-provider';
+import { useCart } from '@/app/context/cart-context';
 
 const Navbar = () => {
-  const { items } = useCartStore((state) => state);
+  const { cart } = useCart();
   const [showNavList, setShowNavList] = useState(false);
 
   const toggleNavList = () => setShowNavList(!showNavList);
-  
+
   return (
     <div>
       <nav className="z-10 flex flex-row items-center justify-center md:p-2.5 lg:p-5 xl:p-5">
@@ -47,30 +48,31 @@ const Navbar = () => {
               </div>
             </Link>
           </li>
+          {cart.length === 0 ? (
+            <button
+              onClick={() => {
+                if (document !== null) {
+                  (
+                    document.getElementById('cart_modal')! as HTMLDialogElement
+                  ).showModal();
+                }
+              }}
+              className="flex rounded-full bg-white p-2.5"
+            >
+              <ShoppingCartIcon className="h-6 w-6 text-black" />
+              <span className="px-2 text-black">{cart.length}</span>
+            </button>
+          ) : (
+            <li>
+              <Link href="/storefront/checkout/cart">
+                <div className="flex items-center justify-center rounded-full bg-white p-2.5">
+                  <ShoppingCartIcon className="h-6 w-6 text-black" />
+                  <span className="px-2 text-black">{cart.length}</span>
+                </div>
+              </Link>
+            </li>
+          )}
         </ul>
-
-        {items.length === 0 ? (
-          <button
-            onClick={() => {
-              if (document !== null) {
-                (document.getElementById('cart_modal')! as HTMLDialogElement).showModal();
-              }
-            }}
-            className="flex rounded-full bg-white p-2.5"
-          >
-            <ShoppingCartIcon className="h-6 w-6 text-black" />
-            <span className="px-2 text-black">{items.length}</span>
-          </button>
-        ) : (
-          <li className="block marker:sm:px-2 lg:px-2">
-            <Link href="/storefront/checkout/cart">
-              <div className="flex items-center justify-center rounded-full bg-white p-2.5">
-                <ShoppingCartIcon className="h-6 w-6 text-black" />
-                <span className="px-2 text-black">{items.length}</span>
-              </div>
-            </Link>
-          </li>
-        )}
 
         <button
           itemType="button"
@@ -119,7 +121,7 @@ const Navbar = () => {
         </ul>
       </nav>
       <dialog id="cart_modal" className="modal">
-        <div className="flex justify-center items-center modal-box">
+        <div className="modal-box flex items-center justify-center">
           <p className="text-black">Your cart is currently empty!</p>
         </div>
         <form method="dialog" className="modal-backdrop">

@@ -1,6 +1,5 @@
 import Product from '@/app/models/product';
 import connectMongo from '@/app/utils/connect-mongo';
-import { Head } from 'next/document';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { Metadata } from 'next';

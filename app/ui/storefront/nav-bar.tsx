@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartIcon from './cart-icon';
 import {
   Bars3Icon,
@@ -13,12 +13,19 @@ import {
 } from '@heroicons/react/24/outline';
 import { useCartStore } from '@/app/providers/cart-store-provider';
 import { useCart } from '@/app/context/cart-context';
+import { IProduct } from '@/app/models/product';
 
 const Navbar = () => {
-  const { cart } = useCart();
+  const [localCart, setLocalCart] = useState<IProduct[]>([]);
   const [showNavList, setShowNavList] = useState(false);
+  const { cart } = useCart();
 
   const toggleNavList = () => setShowNavList(!showNavList);
+
+  useEffect(() => {
+
+    setLocalCart(cart);
+  }, [cart])
 
   return (
     <div>
@@ -48,7 +55,7 @@ const Navbar = () => {
               </div>
             </Link>
           </li>
-          {cart.length === 0 ? (
+          {localCart.length === 0 ? (
             <button
               onClick={() => {
                 if (document !== null) {
@@ -60,14 +67,14 @@ const Navbar = () => {
               className="flex rounded-full bg-white p-2.5"
             >
               <ShoppingCartIcon className="h-6 w-6 text-black" />
-              <span className="px-2 text-black">{cart.length}</span>
+              <span className="px-2 text-black">{localCart.length}</span>
             </button>
           ) : (
             <li>
               <Link href="/storefront/checkout/cart">
                 <div className="flex items-center justify-center rounded-full bg-white p-2.5">
                   <ShoppingCartIcon className="h-6 w-6 text-black" />
-                  <span className="px-2 text-black">{cart.length}</span>
+                  <span className="px-2 text-black">{localCart.length}</span>
                 </div>
               </Link>
             </li>

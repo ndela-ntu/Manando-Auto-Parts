@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setLocalCart(cart);
-  }, [cart])
+  }, [cart]);
 
   return (
     <div>
@@ -53,32 +53,33 @@ const Navbar = () => {
               </div>
             </Link>
           </li>
-          {localCart.length === 0 ? (
-            <button
-              onClick={() => {
-                if (document !== null) {
-                  (
-                    document.getElementById('cart_modal')! as HTMLDialogElement
-                  ).showModal();
-                }
-              }}
-              className="flex rounded-full bg-white p-2.5"
-            >
-              <ShoppingCartIcon className="h-6 w-6 text-black" />
-              <span className="px-2 text-black">{localCart.length}</span>
-            </button>
-          ) : (
-            <li>
-              <Link href="/storefront/checkout/cart">
-                <div className="flex items-center justify-center rounded-full bg-white p-2.5">
-                  <ShoppingCartIcon className="h-6 w-6 text-black" />
-                  <span className="px-2 text-black">{localCart.length}</span>
-                </div>
-              </Link>
-            </li>
-          )}
         </ul>
 
+        {localCart.length === 0 ? (
+          <button
+            onClick={() => {
+              if (document !== null) {
+                (
+                  document.getElementById('cart_modal')! as HTMLDialogElement
+                ).showModal();
+              }
+            }}
+            className="flex rounded-full bg-white p-2.5"
+          >
+            <ShoppingCartIcon className="h-6 w-6 text-black" />
+            <span className="px-2 text-black">{localCart.length}</span>
+          </button>
+        ) : (
+          <li>
+            <Link href="/storefront/checkout/cart">
+              <div className="flex items-center justify-center rounded-full bg-white p-2.5">
+                <ShoppingCartIcon className="h-6 w-6 text-black" />
+                <span className="px-2 text-black">{localCart.length}</span>
+              </div>
+            </Link>
+          </li>
+        )}
+        
         <button
           itemType="button"
           onClick={toggleNavList}

@@ -17,8 +17,9 @@ export default async function Page({
 }) {
   const query = searchParams?.query || '';
   const filterBy = searchParams?.filterBy || '';
-  let products: IProduct[];
+  
   await connectMongo();
+  let products: IProduct[];
   if (
     (query == undefined || query === '') &&
     (filterBy === 'ALL' || filterBy == undefined)

@@ -8,6 +8,15 @@ import Welcome from './ui/welcome';
 import Main from './ui/main';
 import MainNavbar from './ui/main-nav-bar';
 import ContactDetails from './ui/contact-details';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Manando Auto Parts | Manando Auto Parts',
+  description: 'This is page is to view the cart',
+  icons: {
+    icon: '/favicon.ico'
+  }
+}
 
 export default function Page() {
   return (

@@ -6,6 +6,16 @@ import Search from '../ui/search';
 import { FunnelIcon } from '@heroicons/react/24/outline';
 import { categories } from '../models/categories';
 import Filter from '../ui/filter';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Storefront | Manando Auto Parts',
+  description: 'This is page is to shop for auto parts',
+  icons: {
+    icon: '/favicon.ico'
+  }
+}
+
 
 export default async function Page({
   searchParams,

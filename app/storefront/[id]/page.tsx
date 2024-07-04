@@ -20,7 +20,7 @@ export async function generateMetadata({
     openGraph: {
       title: product.name,
       description: product.description,
-      url: `https://manando-auto-parts.vercel.app/storefront/${id}`,
+      url: `https://www.manando.co.za/storefront/${id}`,
       images: [
         {
           url: product.imageURL,
@@ -28,6 +28,9 @@ export async function generateMetadata({
         },
       ],
     },
+    icons: {
+      icon: '/favicon.ico'
+    }
   };
 }
 

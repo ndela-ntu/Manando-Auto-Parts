@@ -11,6 +11,8 @@ import bcrypt from 'bcrypt';
 async function getUser(userEmail: string) {
   try {
     await connectMongo();
+    const users = await User.find();
+    console.log(users);
     const user = await User.findOne({ email: userEmail });
 
     const { _id, name, email, password } = user;

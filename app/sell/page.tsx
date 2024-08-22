@@ -1,5 +1,5 @@
 import React from 'react';
-import AcmeLogo from '../ui/acme-logo';
+import AcmeLogo from '../ui/map-logo';
 import MainNavbar from '../ui/main-nav-bar';
 import SellForm from '../ui/sell-form';
 

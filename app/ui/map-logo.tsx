@@ -3,7 +3,7 @@ import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function AcmeLogo() {
+export default function MapLogo() {
   return (
     <Link href="/">
       <div className={`${lusitana.className}`}>
@@ -12,7 +12,7 @@ export default function AcmeLogo() {
           alt="Picture of the author"
           sizes="100vw"
           style={{
-            width: '100%',
+            width: '80%',
             height: 'auto',
           }}
           width={500}

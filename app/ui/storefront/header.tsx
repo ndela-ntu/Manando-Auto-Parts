@@ -1,4 +1,4 @@
-import AcmeLogo from '../acme-logo';
+import AcmeLogo from '../map-logo';
 import Navbar from './nav-bar';
 
 export default function Header() {
